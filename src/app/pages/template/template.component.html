@@ -5,13 +5,26 @@
         <div class="form-group row">
             <label for="" class="col-2 col-form-label">Nombre</label>
             <div class="col-8">
+                <!-- Where #userName is a reference to this field -->
                 <input 
                     type="text"
+                    required
+                    minlength="6"
                     name="nombre"
+                    [class.is-invalid]="userName.invalid && userName.touched"
                     [ngModel]="User.name"
                     placeholder="Nombre"
                     class="form-control"
+                    #userName="ngModel" 
                 >
+
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="userName.invalid && userName.touched"
+                >
+                    Type almost six letters
+                </small>
             </div>
         </div>
         <div class="form-group row">
@@ -19,9 +32,22 @@
             <div class="col-8">
                 <input 
                     type="text"
-                    placeholder="Apellido"
+                    required
+                    minlength="4"
+                    [ngModel]="User.lastName"
+                    name="lastName"
+                    placeholder="Last name"
+                    [class.is-invalid]="refLastName.invalid && refLastName.touched"
                     class="form-control"
+                    #refLastName="ngModel"
+                > 
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="refLastName.invalid && refLastName.touched"
                 >
+                    Type almost four letters
+                </small>  
             </div>
         </div>
         <div class="form-group row">
@@ -29,9 +55,22 @@
             <div class="col-8">
                 <input 
                     type="email"
-                    placeholder="Correo"
+                    required
+                    placeholder="Email"
+                    name="email"
+                    [ngModel]="User.email"
+                    [class.is-invalid]="refCorreo.invalid && refCorreo.touched"
                     class="form-control"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    #refCorreo="ngModel"
                 >
+                <small 
+            
+                    *ngIf="refCorreo.invalid && refCorreo.touched"
+                    class="form-text text-danger"
+                >
+                    Email is invalid
+                </small>  
             </div>
         </div>
         <div class="form-group row">
