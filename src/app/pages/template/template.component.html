@@ -82,11 +82,65 @@
                     id="" 
                     class="form-control"
                     [disabled]="countries.length === 0"
-                    [ngModel]="countries"
+                    [ngModel]="User.country"
                     required
+                    [class.is-invalid]="refselectCountry.invalid && refselectCountry.touched"
+                    #refselectCountry="ngModel"
                 >
                     <option [value]="co.code" *ngFor="let co of countries">{{co.country}}</option>
-                </select>                           
+                </select> 
+                <small 
+            
+                    *ngIf="refselectCountry.invalid && refselectCountry.touched"
+                    class="form-text text-danger"
+                >
+                    You must choose a contry
+                </small>                          
+            </div>
+        </div>
+
+        <!-- RADIO BUTTONS -->
+        <div class="form-group row">
+            <label for="" class="col-2 col-form-label">Gender</label>
+            <div class="col-8">
+                <div class="form-check form-check-inline">
+                    <label for="" class="mr-2">Male</label>
+                    <input 
+                        type="radio" 
+                        name="gender"
+                        [ngModel]="User.gender" 
+                        value="M"
+                        id="" 
+                        required
+                        class="form-check-input"
+                        #refGender="ngModel"
+                        [class.is-invalid]="refGender.invalid && refGender.touched"
+
+
+                    >
+                </div>
+                <div class="form-check form-check-inline">                    
+                    <label for="" class="mr-2">Famle</label>
+                    <input 
+                        type="radio" 
+                        name="gender"
+                        [ngModel]="User.gender"
+                        id=""
+                        value="F" 
+                        required
+                        class="form-check-input"
+                        #refGender="ngModel"
+                        [class.is-invalid]="refGender.invalid && refGender.touched"
+
+                    >
+                </div>
+                <small 
+        
+                    *ngIf="refGender.invalid && refGender.touched"
+                    class="form-text text-danger"
+                >
+                    You must choose a gender
+                </small>                          
             </div>
         </div>
 

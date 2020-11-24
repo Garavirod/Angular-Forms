@@ -13,7 +13,9 @@ export class TemplateComponent implements OnInit {
   User={
     name:"",
     lastName:"",
-    email:""
+    email:"",
+    country:"",
+    gender:""
   };
 
   countries: any [] = [];
@@ -26,7 +28,7 @@ export class TemplateComponent implements OnInit {
       this.countries= countries;   
       this.countries.unshift(
         {
-          name:'[Choose country]',
+          country:'[Choose a country]',
           code:''
         }
       );
