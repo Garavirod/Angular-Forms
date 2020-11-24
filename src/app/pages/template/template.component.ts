@@ -11,18 +11,26 @@ export class TemplateComponent implements OnInit {
 
 
   User={
-    // name:"Rodrigo"
     name:"",
     lastName:"",
     email:""
   };
+
+  countries: any [] = [];
 
   constructor(private countryService:CountryService) { }
 
   ngOnInit(): void {
     // This return an observable so we need to subscribe  for catchin data
     this.countryService.getCountries().subscribe(countries=>{
-      console.log(countries);      
+      this.countries= countries;   
+      this.countries.unshift(
+        {
+          name:'[Choose country]',
+          code:''
+        }
+      );
+      console.log(this.countries);   
     });
   }
 
