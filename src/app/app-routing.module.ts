@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {path:'template', component:TemplateComponent},
   {path:'reactivo', component:ReactiveComponent},
-  {path:'**', pathMatch: 'full', redirectTo:'template'},
+  {path:'**', pathMatch: 'full', redirectTo:'reactivo'},
 
 ];
 
