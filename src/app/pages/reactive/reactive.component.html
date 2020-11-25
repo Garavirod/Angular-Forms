@@ -4,41 +4,91 @@
     <div>
         <div class="form-group row">
             <label for="" class="col-2 col-form-label">Nombre</label>
-            <div class="col-8">
+            <div class="col">
                 <input 
                     type="text"
                     placeholder="Nombre"
                     class="form-control"
                     formControlName="name"
+                    [class.is-invalid]="isValidName"
                 >
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="isValidName"
+                >
+                    Type almost six letters
+                </small>
             </div>
         </div>
         <div class="form-group row">
             <label for="" class="col-2 col-form-label">Apellido</label>
-            <div class="col-8">
+            <div class="col">
                 <input 
                     type="text"
                     placeholder="Apellido"
                     class="form-control"
                     formControlName="lastname"
+                    [class.is-invalid]="isValidLastName"
 
                 >
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="isValidLastName"
+                >
+                    Type almost six letters
+                </small>
             </div>
         </div>
         <div class="form-group row">
             <label for="" class="col-2 col-form-label">Correo</label>
-            <div class="col-8">
+            <div class="col">
                 <input 
                     type="email"
                     placeholder="Correo"
                     class="form-control"
                     formControlName="mail"
+                    [class.is-invalid]="isValidEmail"
                 >
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="isValidEmail"
+                >
+                    Type a valid email
+                </small>
             </div>
         </div>
+        <!-- ADDRES FIELD -->
+
+        <div class="form-group row" formGroupName="address">
+            <label for="" class="col-2 col-form-label">Correo</label>
+            <div class="form-row col">
+                <div class="col">
+                    <input 
+                    type="text"
+                    placeholder="district"
+                    class="form-control" 
+                    [class.is-invalid]="isValidDistrict"
+                    formControlName="district"                  
+                    >                   
+                </div>
+                <div class="col">
+                    <input 
+                    type="text"
+                    placeholder="City"
+                    class="form-control"
+                    [class.is-invalid]="isValidCity"
+                    formControlName="city"                   
+                    >                   
+                </div>
+            </div>
+        </div>
+
         <div class="form-group row">
-            <div class="col-8">
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>                            
+            <div class="col">
+                <button type="submit" class="out btn btn-primary btn-lg btn-block">Guardar</button>                            
             </div>
         </div>
         
