@@ -1,5 +1,6 @@
+import { ValidatorsService } from './../../services/validators.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive',
@@ -11,8 +12,12 @@ export class ReactiveComponent implements OnInit {
   form: FormGroup;
 
   /* Formbuilder helps to create forms swiftly */
-  constructor(private fb: FormBuilder) {
+  constructor(
+      private fb: FormBuilder,
+      private validators: ValidatorsService
+    ) {
     this.initForm();
+    // this.loadDataForm();
    }
 
   ngOnInit(): void {
@@ -38,6 +43,19 @@ export class ReactiveComponent implements OnInit {
     return (this.form.get('address.city').invalid && this.form.get('address.city').touched);
   }
 
+  get isValidHobbie(){
+    return (this.form.get('hobbie').invalid && this.form.get('hobbie').touched);
+    
+  }
+
+  get disabledButtonAdd(){
+    return !(this.form.get('hobbie').value != "")
+  }
+
+  get getHobbies() {
+    return this.form.get('hobbies') as FormArray;
+  }
+
   // This mehthod initialize the form
   initForm(){
     /* Here is defyning the form */
@@ -45,7 +63,8 @@ export class ReactiveComponent implements OnInit {
       // [data, syncronus Validators, asynconus Validator]
       name:['',[
           Validators.required,
-          Validators.minLength(6)
+          Validators.minLength(6),
+          this.validators.noData
         ]
       ],
       lastname:['',[
@@ -64,8 +83,37 @@ export class ReactiveComponent implements OnInit {
           city:['',Validators.required],
 
         }
-      )
+      ),
+      hobbie:['',Validators.required],
+      // Array of controls (form)
+      hobbies:this.fb.array([]),
     });
+  }
+
+  /* Load data when form is initializated */
+  // loadDataForm(){
+  //   this.form.setValue({
+  //     name:"Rodrigo",
+  //     lastname:"García",
+  //     mail:"rodrigo12@gmail.com",
+  //     address:{
+  //       district:"CDMX",
+  //       city:"México"
+  //     },
+  //     hobbies:[]
+  //   });
+  // }
+
+
+  /* Add hobbies */
+
+  addHobbie(){
+    this.getHobbies.push(this.fb.control(this.form.get('hobbie').value,Validators.required));
+  }
+
+  /* Delete hobbie */
+  deleteHobbie(i:number){
+    this.getHobbies.removeAt(i);
   }
 
   /* This method save data */
@@ -83,6 +131,9 @@ export class ReactiveComponent implements OnInit {
       return;
     }
     console.log(this.form);
+    this.form.reset({
+      name:"Samantha"
+    });
     
   }
 

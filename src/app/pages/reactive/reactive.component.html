@@ -63,7 +63,7 @@
         <!-- ADDRES FIELD -->
 
         <div class="form-group row" formGroupName="address">
-            <label for="" class="col-2 col-form-label">Correo</label>
+            <label for="" class="col-2 col-form-label">Address</label>
             <div class="form-row col">
                 <div class="col">
                     <input 
@@ -82,6 +82,72 @@
                     [class.is-invalid]="isValidCity"
                     formControlName="city"                   
                     >                   
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobbies list -->
+
+        <div class="form-group row">
+            <label for="" class="col-2 col-form-label">Hobbie</label>
+            <div class="col">
+                <input 
+                    name="hobbie"
+                    type="text"
+                    placeholder="type yor hobbie.."
+                    class="form-control"  
+                    formControlName="hobbie"
+                    [class.is-invalid]="isValidHobbie"                  
+                >
+                <small 
+            
+                    class="form-text text-danger"
+                    *ngIf="isValidHobbie"
+                >
+                    Type any hobbie
+                </small>
+                <button                     
+                    type="button" 
+                    class="mt-2 btn btn-outline-success btn-lg btn-block"
+                    (click)="addHobbie()"
+                    [disabled]="disabledButtonAdd"
+                    >Add
+                </button>                                            
+            </div>
+        </div>
+        <div class="form-group row" id="hobbiesList">            
+            <div class="col">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Hobbie</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="hobbies">
+                        <tr *ngFor="let ctr of getHobbies.controls; let i = index;">
+                            <td>{{i + 1}}</td>
+                            <td>
+                                <!-- Like vue :directive for variables on angular [] -->
+                                <!-- 
+                                    for printing just the value
+                                 -->
+                                <!-- <p>{{ctr.value}}</p> -->
+                                <input type="text" [formControlName]="i">
+                            </td>
+                            <td>
+                                <button 
+                                type="button" 
+                                class="btn btn-danger"
+                                (click)="deleteHobbie(i)"
+                            >Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group row">
+                    
                 </div>
             </div>
         </div>
